@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 using namespace std;
 
 template <typename T1>
@@ -70,15 +71,74 @@ public:
             
     }
 
+    void fileWriting()
+    {
+        ofstream myFile;
+        myFile.open("HelloFile.txt", ios_base::out);
+
+        if(myFile.is_open())
+        {
+            cout<<"File Writing: File open successfully."<<endl;
+
+             for(int i=0; i<N; ++i)
+             {
+                for(int j=0; j<M; ++j)
+                {
+                    myFile<<(*(*(matrix+i)+j))<<" ";
+                }
+                myFile<<endl;
+             }
+
+            cout<<"Finieshed writing to file, will close now."<<endl;
+
+            myFile.close();
+        }
+    }
+
+    void fileReading()
+    {
+        ifstream myFile;
+        myFile.open("HelloFile.txt", ios_base::in);
+
+        if(myFile.is_open())
+        {
+            cout<<"File Reading: File open successfully. It contains:"<<endl;
+
+            string fileContents;
+            while(myFile.good())
+            {
+                getline(myFile, fileContents);
+                cout<<fileContents<<endl;
+            }
+
+            cout<<"Finished reading file, will close now."<<endl;
+            myFile.close();
+        }
+        else
+        {
+            throw "open() failed: check if file exist or not.";
+        }
+    }
+
 };
 
 int main()
 {
-    //myMatrix<int>    tmpMatrix(2, 2);
+    myMatrix<int>    tmpMatrix(2, 2);
     //myMatrix<double> tmpMatrix(2, 2);
-    myMatrix<char>     tmpMatrix(2, 2);
+    //myMatrix<char>     tmpMatrix(2, 2);
     tmpMatrix.inputMatrixValue();
-    tmpMatrix.outputMatrixValue();
-
+    tmpMatrix.outputMatrixValue(); 
+    
+    //tmpMatrix.fileWriting();
+/*     try
+    {
+        tmpMatrix.fileReading();
+    }
+    catch(const char* exp)
+    {
+        cout<<"Exception: "<<exp<<endl;
+    } */
+        
 }
 

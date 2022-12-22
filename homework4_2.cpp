@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>    // to use copy
 #include <cstdlib>      // to use exit
+#include <fstream>
 using namespace std;
 
 template<typename T1>
@@ -71,9 +72,61 @@ public:
             
     }
 
+    void fileWriting()
+    {
+        ofstream myFile;
+        myFile.open("HelloFile.txt", ios_base::out);
+
+        if(myFile.is_open())
+        {
+            cout<<"File Writing: File open successfully."<<endl;
+
+             for(int i=0; i<N; ++i)
+             {
+                for(int j=0; j<M; ++j)
+                {
+                    myFile<<(*(*(matrix+i)+j))<<" ";
+                }
+                myFile<<endl;
+             }
+
+            cout<<"Finieshed writing to file, will close now."<<endl;
+
+            myFile.close();
+        }
+    }
+
+    void fileReading()
+    {
+        ifstream myFile;
+        myFile.open("HelloFile.txt", ios_base::in);
+
+        if(myFile.is_open())
+        {
+            cout<<"File Reading: File open successfully. It contains:"<<endl;
+
+            string fileContents;
+            while(myFile.good())
+            {
+                getline(myFile, fileContents);
+                cout<<fileContents<<endl;
+            }
+
+            cout<<"Finished reading file, will close now."<<endl;
+            myFile.close();
+        }
+        else
+        {
+            throw "open() failed: check if file exist or not.";
+        }
+    }
+
 
     myMatrix operator + (const myMatrix& addMatrix)
     {   
+        if(typeid(T1).name() == typeid(char).name())
+            throw "char type can not do + operation, only permitted int and double.";
+
         if((this->N == addMatrix.N) && (this->M == addMatrix.M))
         {
             myMatrix resultMatrix(this->N, this->M);
@@ -98,6 +151,9 @@ public:
 
     myMatrix operator * (const myMatrix& multiplyMatrix)
     {
+        if(typeid(T1).name() == typeid(char).name())
+            throw "char type can not do * operation, only permitted int and double.";
+        
         if(this->M == multiplyMatrix.N)
         {
             myMatrix resultMatrix(this->N, multiplyMatrix.M);
@@ -272,21 +328,31 @@ void useCopyFunc(myMatrix<int> tmpMatrix)
 
 int main()
 {
-    //myMatrix<int>    originMatrix(2, 2);
-    myMatrix<double> originMatrix(2, 1);
+    myMatrix<int>    originMatrix(2, 2);
+    //myMatrix<double> originMatrix(2, 1);
     originMatrix.inputMatrixValue();
     originMatrix.outputMatrixValue();
 
-    myMatrix<double> testMatrix(2, 1);
+    myMatrix<int> testMatrix(2, 2);
     testMatrix.inputMatrixValue();
     testMatrix.outputMatrixValue();
+    
+    try
+    {
+        myMatrix<int> resultMatrix(originMatrix + testMatrix);
+        resultMatrix.outputMatrixValue();
+        resultMatrix.fileWriting();
+    }
+    catch(const char* exp)
+    {
+        cout<<"Exception: "<<exp<<endl;
+    }
 
-    myMatrix<double> resultMatrix(originMatrix + testMatrix);  //how did () allocate resultMatrix?
     //myMatrix resultMatrix(originMatrix * testMatrix);
     //myMatrix resultMatrix(originMatrix<<testMatrix);
     //myMatrix resultMatrix(originMatrix>>2);
-    resultMatrix.outputMatrixValue();
-    
+
+
 /*     myMatrix<int> testMatrix(1,1);
     testMatrix.inputMatrixValue();
     testMatrix.outputMatrixValue();
