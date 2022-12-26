@@ -328,18 +328,17 @@ void useCopyFunc(myMatrix<int> tmpMatrix)
 
 int main()
 {
-    myMatrix<int>    originMatrix(2, 2);
-    //myMatrix<double> originMatrix(2, 1);
+    myMatrix<char>    originMatrix(2, 2);
     originMatrix.inputMatrixValue();
     originMatrix.outputMatrixValue();
 
-    myMatrix<int> testMatrix(2, 2);
+    myMatrix<char> testMatrix(2, 2);
     testMatrix.inputMatrixValue();
     testMatrix.outputMatrixValue();
     
     try
     {
-        myMatrix<int> resultMatrix(originMatrix + testMatrix);
+        myMatrix<char> resultMatrix(originMatrix + testMatrix);
         resultMatrix.outputMatrixValue();
         resultMatrix.fileWriting();
     }
@@ -348,18 +347,24 @@ int main()
         cout<<"Exception: "<<exp<<endl;
     }
 
-    //myMatrix resultMatrix(originMatrix * testMatrix);
-    //myMatrix resultMatrix(originMatrix<<testMatrix);
-    //myMatrix resultMatrix(originMatrix>>2);
-
-
-/*     myMatrix<int> testMatrix(1,1);
-    testMatrix.inputMatrixValue();
-    testMatrix.outputMatrixValue();
-
-    useCopyFunc(originMatrix); */
-
-    //cout<<originMatrix(1,1)<<endl;
 
 }
 
+// console result:
+/* A null matrix is created.
+d
+f
+a
+e
+d f 
+a e 
+A null matrix is created.
+g
+v
+a
+c
+g v 
+a c 
+Exception: char type can not do + operation, only permitted int and double.
+The matrix has been deleted.
+The matrix has been deleted. */

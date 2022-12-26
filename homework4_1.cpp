@@ -125,20 +125,35 @@ public:
 int main()
 {
     myMatrix<int>    tmpMatrix(2, 2);
-    //myMatrix<double> tmpMatrix(2, 2);
-    //myMatrix<char>     tmpMatrix(2, 2);
     tmpMatrix.inputMatrixValue();
     tmpMatrix.outputMatrixValue(); 
     
-    //tmpMatrix.fileWriting();
-/*     try
+    tmpMatrix.fileWriting();
+    try
     {
         tmpMatrix.fileReading();
     }
     catch(const char* exp)
     {
         cout<<"Exception: "<<exp<<endl;
-    } */
+    }
         
 }
+
+// console result:
+/* A null matrix is created.
+4
+3
+1
+2
+4 3 
+1 2 
+File Writing: File open successfully.
+Finieshed writing to file, will close now.
+File Reading: File open successfully. It contains:
+4 3 
+1 2 
+
+Finished reading file, will close now.
+The matrix has been deleted. */
 

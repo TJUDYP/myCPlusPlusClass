@@ -50,6 +50,7 @@ public:
 
     void inputMatrixValue()
     {   
+        cout<<"cin the matrix element value: "<<endl;
         for(int i=0; i<N; ++i)
             for(int j=0; j<M; ++j)
             {
@@ -59,6 +60,7 @@ public:
 
     void outputMatrixValue()
     {   
+        cout<<"the matrix element contains: "<<endl;
          for(int i=0; i<N; ++i)
          {
             for(int j=0; j<M; ++j)
@@ -264,27 +266,118 @@ public:
 
 };
 
+void useCopyFunc(myMatrix tmpMatrix)
+{
+    cout<<"using the copy constructor."<<endl;
+}
 
 int main()
 {
-    myMatrix originMatrix(3, 2);
+    myMatrix originMatrix(2, 2);
     originMatrix.inputMatrixValue();
     originMatrix.outputMatrixValue();
 
-    //myMatrix testMatrix(3, 1);
-    //testMatrix.inputMatrixValue();
-    //testMatrix.outputMatrixValue();
+    myMatrix testMatrix(2, 2);
+    testMatrix.inputMatrixValue();
+    testMatrix.outputMatrixValue();
 
-    //myMatrix resultMatrix(originMatrix + testMatrix); //how did () allocate resultMatrix?
-    //myMatrix resultMatrix(originMatrix * testMatrix);
-    //myMatrix resultMatrix(originMatrix<<testMatrix);
-    //myMatrix resultMatrix(originMatrix>>2);
-    //resultMatrix.outputMatrixValue();
+    cout<<"---------------------------"<<endl;
+    myMatrix resultMatrix1(originMatrix + testMatrix);  
+    cout<<"the result of + operation: "<<endl;
+    resultMatrix1.outputMatrixValue();
+
+    cout<<"---------------------------"<<endl;
+    myMatrix resultMatrix2(originMatrix * testMatrix);    
+    cout<<"the result of * operation: "<<endl;
+    resultMatrix2.outputMatrixValue();
     
-    //originMatrix = originMatrix;
-    //originMatrix.outputMatrixValue();
+    cout<<"---------------------------"<<endl;
+    myMatrix resultMatrix3(originMatrix<<testMatrix);
+    cout<<"the result of << operation: "<<endl;
+    resultMatrix3.outputMatrixValue();
 
+    cout<<"---------------------------"<<endl;
+    myMatrix resultMatrix4(originMatrix>>1);
+    cout<<"the result of >> operation: "<<endl;
+    resultMatrix4.outputMatrixValue();
+
+    cout<<"---------------------------"<<endl;
+    cout<<"the result of () operation: "<<endl;
     cout<<originMatrix(1,1)<<endl;
+
+    cout<<"---------------------------"<<endl;
+    cout<<"the result of = operation: "<<endl;
+    originMatrix = testMatrix;
+    originMatrix.outputMatrixValue();
 
 }
 
+//console result:
+/* A null matrix is created.
+cin the matrix element value: 
+4
+2
+1
+5
+the matrix element contains: 
+4 2 
+1 5 
+A null matrix is created.
+cin the matrix element value: 
+2
+1
+4
+1
+the matrix element contains: 
+2 1 
+4 1 
+---------------------------
+A null matrix is created.
+finished + operation.
+the result of + operation: 
+the matrix element contains: 
+6 3 
+5 6 
+---------------------------
+A null matrix is created.
+finished * operation.
+the result of * operation: 
+the matrix element contains: 
+16 6 
+22 6 
+---------------------------
+choose to insert in rows or columns.
+1 in rows, 2 in columns, please cin your number:
+1
+which line of rows do you want to insert?
+1
+A null matrix is created.
+the result of << operation: 
+the matrix element contains: 
+4 2 
+2 1 
+4 1 
+1 5 
+---------------------------
+choose get data in rows or columns.
+1 in rows, 2 in columns, please cin your number:
+1
+A null matrix is created.
+the result of >> operation: 
+the matrix element contains: 
+1 5 
+---------------------------
+the result of () operation: 
+5
+---------------------------
+the result of = operation: 
+finished = operation.
+the matrix element contains: 
+2 1 
+4 1 
+The matrix has been deleted.
+The matrix has been deleted.
+The matrix has been deleted.
+The matrix has been deleted.
+The matrix has been deleted.
+The matrix has been deleted. */

@@ -239,12 +239,14 @@ bool LinkedList<T1>::find(string f_name)
     {
         if (tmp->data->getName() == f_name)
         {
+            cout<<"--------------------------"<<endl;
             cout<<"The List contains: "<<f_name<<endl;
             return true;      
         }
     }
 
-    cout<<"The List doesn't contains: "<<f_name<<endl;
+    cout<<"--------------------------"<<endl;
+    cout<<"The List doesn't contain: "<<f_name<<endl;
     return false;
 }
 
@@ -271,6 +273,7 @@ void LinkedList<T1>::delete_data(string d_name)
             delete_node_pre->next = delete_node->next;   
         }
         
+        cout<<"--------------------------"<<endl;
         cout<<"deleted the data of: "<<d_name<<endl;
     }
 
@@ -420,46 +423,84 @@ void LinkedList<T1>::allFileReading()
 // =======================================================================
 int main()
 {
-    //UnderGraduate u1("dyp", 'm', 22, 430424199912093814, 650);
-    //UnderGraduate u2("ddyypp", 'm', 23, 430424199812093814, 660);
-    //u1.displayData();
+    //UnderGraduate u1("dsh", 'm', 22, 430424199910233814, 650);
+    //UnderGraduate u2("cmy", 'f', 21, 430424200009243825, 680);
     //u1.fileWriting();
+    //u2.fileWriting();
     //u1.fileReading();
     
-    //u2.fileWriting();
-    
-    //Teacher t1("ypd", 'f', 32, 430424198912093814, 65000);
-    //Teacher t2("DiPeng", 'm', 20, 430424200010013231, 185000);
+    //Teacher t1("DiPeng", 'm', 30, 430424199210013231, 185000);
     //t1.fileWriting();
     //t1.fileReading();
     //t1.displayData();
 
-    //Graduate g1("Kevin", 'm', 42, 421876197804091273, 22112006, "Computer", 1200);
+    //Graduate g1("Kevin", 'm', 42, 421876198004091273, 22112006, "Computer", 1200);
     //g1.fileWriting();
 
     LinkedList<Person> myList;
     myList.allFileReading();
-    //myList.append(&u2);
-    //myList.append(&u2);
-    //myList.append(&t1);
-    //myList.append(&t2);
-    //myList.allFileWriting(); 
-    //myList.print();
-   
     myList.print();
-    myList.delete_data("DiPeng");
+    myList.find("DiPeng");
+
+    Graduate g2("O'sullivan", 'f', 18, 430424200408091223, 22112001, "Civil-Engineering", 2400);
+    myList.append(&g2);
     myList.print();
-    //myList.allFileWriting();
 
-    //myList.allFileReading();
-    //allFileReadToList(&myList);
-    //myList.append(&u2);
-    //myList.print();
+    myList.delete_data("Kevin");
+    myList.print();
+    myList.allFileWriting(); 
 
-    //UnderGraduate u3;
-    //u3.fileReading();
-    
-    //UnderGraduate u;
-
-    //LinkedList<Person> myList;
 }
+
+
+//console result:
+/* --------------------------
+reading all the binary file into LinkedList.
+rows_data(Undergraduate): 2
+File Reading: studentFile.txt open successfully. It contains:
+dsh m 22 430424199910233814 650
+cmy f 21 430424200009243825 680
+Finished reading studentFile.txt, will close now.
+rows_data(Teacher): 1
+File Reading: teacherFile.txt open successfully. It contains:
+DiPeng m 30 430424199210013231  185000
+Finished reading teacherFile.txt, will close now.
+rows_data(Graduate): 1
+File Reading: graduateFile.txt open successfully. It contains:
+Kevin m 42 421876198004091273 22112006 Computer 1200
+Finished reading graduateFile.txt, will close now.
+--------------------------
+finished reading all the binary file into LinkedList.
+--------------------------
+all the data in the list now: 
+dsh m 22 430424199910233814 650
+cmy f 21 430424200009243825 680
+DiPeng m 30 430424199210013231  185000
+Kevin m 42 421876198004091273 22112006 Computer 1200
+--------------------------
+The List contains: DiPeng
+--------------------------
+all the data in the list now: 
+dsh m 22 430424199910233814 650
+cmy f 21 430424200009243825 680
+DiPeng m 30 430424199210013231  185000
+Kevin m 42 421876198004091273 22112006 Computer 1200
+O'sullivan f 18 430424200408091223 22112001 Civil-Engineering 2400
+--------------------------
+The List contains: Kevin
+--------------------------
+deleted the data of: Kevin
+--------------------------
+all the data in the list now: 
+dsh m 22 430424199910233814 650
+cmy f 21 430424200009243825 680
+DiPeng m 30 430424199210013231  185000
+O'sullivan f 18 430424200408091223 22112001 Civil-Engineering 2400
+File Writing: studentFile.bin open successfully.
+Finieshed writing to studentFile.bin, will close now.
+File Writing: studentFile.bin open successfully.
+Finieshed writing to studentFile.bin, will close now.
+File Writing: teacherFile.bin open successfully.
+Finieshed writing to teacherFile.bin, will close now.
+File Writing: graduateFile.bin open successfully.
+Finieshed writing to graduateFile.bin, will close now. */
